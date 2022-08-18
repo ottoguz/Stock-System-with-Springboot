@@ -28,6 +28,11 @@ public class Customer {
     private String email;
     private Boolean active;
 
+    //Added constructor to star application marked as ACTIVE from startup
+    public Customer() {
+        this.active = true;
+    }
+
     public Long getId() {
         return id;
     }

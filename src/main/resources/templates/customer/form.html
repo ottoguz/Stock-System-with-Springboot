@@ -11,6 +11,7 @@
         <div>
             <h1>Customer Data</h1>
             <hr>
+            <!--th:object = CREATES AN OBJECT | th:action = SPECIFIES THE URL WHERE DATA WILL BE SENT-->
             <form th:action="@{/customers}" th:object="${customer}" method="post">
                 <input id="activated" type="hidden" th:field="*{id}"/>
                 <div>
