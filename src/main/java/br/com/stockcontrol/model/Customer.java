@@ -16,7 +16,7 @@ public class Customer {
     @Column(length = 11) //11 character
     private String cpf;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "birth_date", columnDefinition = "DATE")
+    @Column(nullable = false, name = "birth_date", columnDefinition = "DATE")
     private LocalDate birthDate;
     @Enumerated(EnumType.STRING)
     private Sex sex;

@@ -1,80 +1,57 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Stock system</title>
-</head>
-<body>
-<div style="padding: 50px" class="container">
-    <h1>Customer Data</h1>
-    <hr>
-    <div>
-        <form th:action="@{/customers" th:object="${customer}" method="POST">
-            <input id="active" type="hidden" th:field="*{id}"/>
-            <div class="mb3 form-check from-switch">
-                <label class="form-check-label" for="active">Active profile</label>
-                <input class="form-check-input" role="switch" id="activated" type="checkbox" th:field="*{active}"/>
-            </div>
-            <div class="mb-6">
-                <label class="form-label" for="name">Name</label>
-                <input class="form-control" id="name" type="text" th:field="*{name}"/>
-                <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-            </div>
-            <div class="row">
-                <div class="col-4 mb-3">
-                    <label class="form-label" for="cpf">CPF</label>
-                    <input class="form-control" id="cpf" type="text" th:field="*{cpf}" />
-                    <span style="color: red" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Stock system</title>
+    </head>
+    <body>
+        <div>
+            <h1>Customer Data</h1>
+            <hr>
+            <form th:action="@{/customers}" th:object="${customer}" method="post">
+                <input id="activated" type="hidden" th:field="*{id}"/>
+                <div>
+                    <label for="active">Active application</label>
+                    <input id="active" type="checkbox" th:field="*{active}"/>
                 </div>
-                <div class="col-4 mb-3">
-                    <label class="form-label" for="birthDate">Birth Date</label>
-                    <input class="form-control" id="birthDate" type="date" th:field="*{birthDate}" />
-                    <span style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
+                <div>
+                    <label for="name">Name</label>
+                    <input id="name" type="text" th:field="*{name}"/>
                 </div>
-                <div class="col-4 mb-3">
-                    <label class="form-label" for="sex">Sex</label>
-                    <select class="form-select" id="sex" th:field="*{sex}">
-                        <option value="">Select an option</option>
+                <div>
+                    <label for="cpf">Cpf</label>
+                    <input id="cpf" type="text" th:field="*{cpf}"/>
+                </div>
+                <div>
+                    <label for="birth_date">Birth Date</label>
+                    <input id="birth_date" type="date" th:field="*{birthDate}">
+                </div>
+                <div>
+                    <label for="sex">Sex</label>
+                    <select id="sex" th:field="*{sex}">
                         <option value="MALE">Male</option>
                         <option value="FEMALE">Female</option>
                     </select>
-                    <span style="color: red" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-3 mb-3">
-                    <label class="form-label" for="phone">Phone</label>
-                    <input class="form-control" id="phone" type="text" th:field="*{phone}"/>
+                <div>
+                    <label for="phone">Telephone</label>
+                    <input id="phone" type="text" th:field="*{phone}"/>
                 </div>
-                <div class="col-3 mb-3">
-                    <label class="form-label" for="cellphone">Celular</label>
-                    <input class="form-control" id="cellphone" type="text" th:field="*{cellphone}"/>
+                <div>
+                    <label for="cell">Cell Phone</label>
+                    <input id="cell" type="text" th:field="*{cell}"/>
                 </div>
-                <div class="col-6 mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" type="text" th:field="*{email}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="text" th:field="*{email}">
                 </div>
-                <div class="mb-3">
-                    <input class="btn btn-primary" type="submit" value="Save"/>
+                <div>
+                    <input type="submit" value="Save">
                 </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<script crossorigin="anonymous" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="></script>
-<script crossorigin="anonymous" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" integrity="sha512-d4KkQohk+HswGs6A1d6Gak6Bb9rMWtxjOa0IiY49Q3TeFd5xAzjWXDCBW9RS7m86FQ4RzM2BdHmdJnnKRYknxw=="></script>
-
-<script type="text/javascript">
-		$(document).ready(function() {
-			$('#cpf').mask('999.999.999-99');
-			$('#phone').mask('(99) 9999-9999');
-			$('#cellphone').mask('(99) 99999-9999');
-		});
-	</script>
-</body>
+            </form>
+        </div>
+    </body>
 </html>
