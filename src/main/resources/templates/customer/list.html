@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stock control - Customers list</title>
+</head>
+<body>
+    <div>
+        <h1>Customers</h1>
+        <hr>
+        <div>
+            <a th:href="@{/customers/new}">New</a>
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <td><b>NAME</b></td>
+                    <td><b>BIRTH DATE</b></td>
+                    <td><b>CPF</b></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.birthDate}"></td>
+                    <td th:text="${customer.cpf}"></td>
+                    <td>
+                        <a th:href="@{/customers/edit/{id}(id=${customer.id})}">Edit</a>
+                    </td>
+                    <td>
+                        <a th:if="${customer.active == false}" th:href="@{/customers/activate/{id}(id=${customer.id})}">Activate</a>
+                        <a th:unless="${customer.active == false}" th:href="@{/customers/inactivate/{id}(id=${customer.id})}">Inactivate</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

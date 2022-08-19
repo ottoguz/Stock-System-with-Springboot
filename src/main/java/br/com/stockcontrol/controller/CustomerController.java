@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,9 +23,35 @@ public class CustomerController {
         model.addAttribute("customer", new Customer());
         return new ModelAndView("/customer/form", model);
     } //method to show a blank form
+
     @RequestMapping(value = "", method = RequestMethod.POST) //without this data will not be saved
     public String save(@ModelAttribute Customer customer) {
         bo.insert(customer);
         return "customer/form";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView listCust(ModelMap model) {
+        model.addAttribute("customers", bo.list());
+        return new ModelAndView("/customer/list", model);
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("customer", bo.searchById(id));
+        return new ModelAndView("/customer/form", model);
+    }
+    @RequestMapping(value = "/inactivate/{id}", method = RequestMethod.GET)
+    public String inactivate(@PathVariable("id") Long id) {
+        Customer customer = bo.searchById(id);
+        bo.deactivate(customer);
+        return "redirect:/customers";
+    }
+
+    @RequestMapping(value = "/activate/{id}", method = RequestMethod.GET)
+    public String activate(@PathVariable("id") Long id) {
+        Customer customer = bo.searchById(id);
+        bo.activate(customer);
+        return "redirect:/customers";
     }
 }
