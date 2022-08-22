@@ -5,11 +5,15 @@ import br.com.stockcontrol.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/customers") // url path to activate controller
@@ -25,7 +29,15 @@ public class CustomerController {
     } //method to show a blank form
 
     @RequestMapping(value = "", method = RequestMethod.POST) //without this data will not be saved
-    public String save(@ModelAttribute Customer customer) {
+    public String save(@Valid @ModelAttribute Customer customer, BindingResult result, RedirectAttributes attr) {
+        if (result.hasErrors())
+            return "customer/form";
+        if (customer.getId() == null) {
+            bo.insert(customer);
+        }
+        else {
+            bo.update(customer);
+        }
         bo.insert(customer);
         return "customer/form";
     }

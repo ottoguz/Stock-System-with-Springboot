@@ -1,8 +1,13 @@
 package br.com.stockcontrol.model;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity //create entity
@@ -11,21 +16,35 @@ public class Customer {
     @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //defines a strategy to create a PK
     private Long id;
+
     @Column(nullable = false, length = 50) //not null
+    @NotBlank(message = "Inform Your name!")
+    @Size(min = 3, max = 50)
     private String name;
+
     @Column(length = 11) //11 character
+    @CPF(message = "Invalid CPF!")
     private String cpf;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(nullable = false, name = "birth_date", columnDefinition = "DATE")
+    @NotNull(message = "Inform your date of birth!")
     private LocalDate birthDate;
+
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Inform your sex!")
     private Sex sex;
+
     @Column(length = 10)
     private String phone;
+
     @Column(length = 11)
     private String cell;
+
     @Column(length = 50)
+    @Email
     private String email;
+
     private Boolean active;
 
     //Added constructor to star application marked as ACTIVE from startup

@@ -22,15 +22,18 @@
                 <div class="mb-6">
                     <label class="form-label" for="name">Name</label>
                     <input class="form-control" id="name" type="text" th:field="*{name}"/>
+                    <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                 </div>
                 <div class="row">
                     <div class="col-4 mb-3">
                         <label class="form-label" for="cpf">Cpf</label>
                         <input class="form-control" id="cpf" type="text" th:field="*{cpf}"/>
+                        <span style="color: red" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
                     </div>
                     <div class="col-4 mb-3">
                         <label class="form-label" for="birth_date">Birth Date</label>
                         <input class="form-control" id="birth_date" type="date" th:field="*{birthDate}">
+                        <span style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
                     </div>
                     <div class="col-4 mb-3">
                         <label class="form-label" for="sex">Sex</label>
@@ -39,6 +42,7 @@
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
                         </select>
+                        <span style="color: red" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -53,6 +57,7 @@
                     <div class="col-6 mb-3">
                         <label class="form-label" for="email">Email</label>
                         <input class="form-control" id="email" type="text" th:field="*{email}">
+                        <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
                 </div>
                 <div class="mb-3">
