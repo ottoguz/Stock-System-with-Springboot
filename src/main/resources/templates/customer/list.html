@@ -16,6 +16,9 @@
             <a class="btn btn-primary" th:href="@{/customers/new}">New</a>
         </div>
         <hr>
+        <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(feedback)}">
+            <span th:text="${feedback}"></span>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>

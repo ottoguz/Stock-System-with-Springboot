@@ -34,9 +34,11 @@ public class CustomerController {
             return "customer/form";
         if (customer.getId() == null) {
             bo.insert(customer);
+            attr.addFlashAttribute("feedback", "Customer successfully added!");
         }
         else {
             bo.update(customer);
+            attr.addFlashAttribute("feedback", "Customer successfully updated!");
         }
         return "redirect:/customers";
     }
@@ -53,16 +55,26 @@ public class CustomerController {
         return new ModelAndView("/customer/form", model);
     }
     @RequestMapping(value = "/inactivate/{id}", method = RequestMethod.GET)
-    public String inactivate(@PathVariable("id") Long id) {
-        Customer customer = bo.searchById(id);
-        bo.deactivate(customer);
+    public String inactivate(@PathVariable("id") Long id, RedirectAttributes attr) {
+        try {
+            Customer customer = bo.searchById(id);
+            bo.deactivate(customer);
+            attr.addFlashAttribute("feedback", "Customer successfully inactivated!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/customers";
     }
 
     @RequestMapping(value = "/activate/{id}", method = RequestMethod.GET)
-    public String activate(@PathVariable("id") Long id) {
-        Customer customer = bo.searchById(id);
-        bo.activate(customer);
+    public String activate(@PathVariable("id") Long id, RedirectAttributes attr) {
+        try {
+            Customer customer = bo.searchById(id);
+            bo.activate(customer);
+            attr.addFlashAttribute("feedback", "Customer successfully Activated!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/customers";
     }
 }
