@@ -10,4 +10,9 @@ public class ApplicationController {
     public String index() {
         return "/customer/index";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "/customer/login";
+    }
 }
