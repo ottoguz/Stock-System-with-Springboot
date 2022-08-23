@@ -38,8 +38,7 @@ public class CustomerController {
         else {
             bo.update(customer);
         }
-        bo.insert(customer);
-        return "customer/form";
+        return "redirect:/customers";
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
