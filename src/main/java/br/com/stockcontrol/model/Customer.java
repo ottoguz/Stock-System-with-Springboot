@@ -22,7 +22,7 @@ public class Customer {
     @Size(min = 3, max = 50)
     private String name;
 
-    @Column(length = 11) //11 character
+    @Column(length = 14) //11 character
     @CPF(message = "Invalid CPF!")
     private String cpf;
 
@@ -35,10 +35,10 @@ public class Customer {
     @NotNull(message = "Inform your sex!")
     private Sex sex;
 
-    @Column(length = 10)
+    @Column(length = 14)
     private String phone;
 
-    @Column(length = 11)
+    @Column(length = 15)
     private String cell;
 
     @Column(length = 50)
