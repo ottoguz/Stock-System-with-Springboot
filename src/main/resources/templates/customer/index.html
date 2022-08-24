@@ -8,44 +8,12 @@
          body {
            padding-top: 4.5rem;
          }
-      </style>
+  </style>
   <title>Stock System</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Stock system</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/products">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/customers">Customers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/suppliers">Suppliers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/entry-note">Entry note</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/exit-note">Exit note</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/Stock">Stock</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/logout">Log Out</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<div th:replace="/customer/fragments/menu :: menu"></div>
 
 <div class="container">
   <div class="bg-light p-5 rounded">
