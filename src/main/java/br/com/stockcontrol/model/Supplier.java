@@ -31,11 +31,11 @@ public class Supplier {
     @Column(length = 14)
     private String phone;
 
-    @Column(length = 15)
+    @Column(length = 20)
     private String email;
     private Boolean active;
 
-    private Supplier() {
+    public Supplier() {
         this.active = true;
     } //constructor to start supplier as active
 
