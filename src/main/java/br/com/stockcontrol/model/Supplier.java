@@ -17,12 +17,12 @@ public class Supplier {
     @Column(nullable = false, length = 50)
     @NotBlank(message = "Inform trading name!")
     @Size(min = 3, max = 50)
-    private String tradingName;
+    private String tradingName; //Nome fantasia
 
     @Column(nullable = false, length = 50)
     @NotBlank(message = "Inform company name!")
     @Size(min = 3, max = 50)
-    private String companyName;
+    private String companyName; //razão social
 
     @Column(length = 18)
     @CNPJ(message = "Invalid CNPJ!")
@@ -30,6 +30,10 @@ public class Supplier {
 
     @Column(length = 14)
     private String phone;
+
+
+    @Column(length = 15)
+    private String cell;
 
     @Column(length = 20)
     private String email;
@@ -77,6 +81,14 @@ public class Supplier {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getCell() {
+        return cell;
+    }
+
+    public void setCell(String cell) {
+        this.cell = cell;
     }
 
     public String getEmail() {

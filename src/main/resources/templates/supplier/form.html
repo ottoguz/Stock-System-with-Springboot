@@ -15,44 +15,35 @@
     </head>
     <body>
 
-    <div th:replace="/customer/fragments/menu :: menu"></div>
+    <div th:replace="/supplier/fragments/menu :: menu"></div>
 
     <div class="container">
         <div class="bg-light p-5 rounded">
-                <h1>Customer Data</h1>
+                <h1>Supplier Data</h1>
                 <hr>
                 <div>
                     <!--th:object = CREATES AN OBJECT | th:action = SPECIFIES THE URL WHERE DATA WILL BE SENT-->
-                    <form th:action="@{/customers}" th:object="${customer}" method="post">
+                    <form th:action="@{/suppliers}" th:object="${supplier}" method="post">
                         <input id="activated" type="hidden" th:field="*{id}"/>
                         <div class="mb-3 form-check form-switch">
                             <label class="form-check-label" for="active">Active application</label>
                             <input class="form-check-input" role="switch" id="active" type="checkbox" th:field="*{active}"/>
                         </div>
                         <div class="mb-6">
-                            <label class="form-label" for="name">Name</label>
-                            <input class="form-control" id="name" type="text" th:field="*{name}"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                            <label class="form-label" for="tradingName">Trading Name</label>
+                            <input class="form-control" id="tradingName" type="text" th:field="*{tradingName}"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('tradingName')}" th:errors="*{tradingName}"></span>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" for="companyName">Company Name</label>
+                            <input class="form-control" id="companyName" type="text" th:field="*{companyName}"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
                         </div>
                         <div class="row">
                             <div class="col-4 mb-3">
-                                <label class="form-label" for="cpf">Cpf</label>
-                                <input class="form-control" id="cpf" type="text" th:field="*{cpf}"/>
-                                <span style="color: red" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <label class="form-label" for="birth_date">Birth Date</label>
-                                <input class="form-control" id="birth_date" type="date" th:field="*{birthDate}">
-                                <span style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <label class="form-label" for="sex">Sex</label>
-                                <select class="form-select" id="sex" th:field="*{sex}">
-                                    <option value="">Select an Option</option>
-                                    <option value="MALE">Male</option>
-                                    <option value="FEMALE">Female</option>
-                                </select>
-                                <span style="color: red" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></span>
+                                <label class="form-label" for="cnpj">CNPJ</label>
+                                <input class="form-control" id="cnpj" type="text" th:field="*{cnpj}"/>
+                                <span style="color: red" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -85,7 +76,7 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#cpf').mask('999.999.999-99');
+                $('#cnpj').mask('99.999.999/0001-99');
                 $('#phone').mask('(99) 9999-9999');
                 $('#cell').mask('(99) 99999-9999');
             });
