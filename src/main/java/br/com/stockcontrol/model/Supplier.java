@@ -35,7 +35,7 @@ public class Supplier {
     @Column(length = 15)
     private String cell;
 
-    @Column(length = 20)
+    @Column(length = 30)
     private String email;
     private Boolean active;
 
