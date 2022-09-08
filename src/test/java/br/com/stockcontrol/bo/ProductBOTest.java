@@ -1,6 +1,8 @@
 package br.com.stockcontrol.bo;
 
-import br.com.stockcontrol.model.Supplier;
+
+import br.com.stockcontrol.model.Category;
+import br.com.stockcontrol.model.Product;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -10,42 +12,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SupplierBOTest {
+public class ProductBOTest {
 
     @Autowired
-    private SupplierBO supplierBO;
+    ProductBO productBO = new ProductBO();
 
     @Test
     @Order(1)
     public void insert() {
-        Supplier supplier = new Supplier();
-        supplier.setCompanyName("Organizações Tabajara");
-        supplier.setTradingName("Pharmácia do seu Creisson");
-        supplier.setCnpj("41.444.337/0001-75");
-        supplier.setEmail("tabajara@gmail.com");
-        supplier.setPhone("9999-9999");
-        supplier.setActive(true);
-        supplierBO.insert(supplier);
+        Product product = new Product();
+        product.setName("Laptop");
+        product.setCategory(Category.COMPUTERS);
+        product.setActive(true);
+        productBO.insert(product);
     }
 
     @Test
     @Order(2)
     public void searchById() {
-        Supplier supplier = supplierBO.searchById(1L);
-        System.out.println(supplier);
+        Product product = productBO.searchById(1L);
+        System.out.println(product);
     }
 
     @Test
     @Order(3)
     public void update() {
-        Supplier supplier = supplierBO.searchById(1L);
-        supplier.setCnpj("64.477.821/0001-04");
-        supplierBO.update(supplier);
+        Product product = productBO.searchById(1L);
+        product.setName("Desktop");
     }
-
-
 }
