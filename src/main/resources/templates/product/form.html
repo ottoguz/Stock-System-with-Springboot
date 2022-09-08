@@ -30,11 +30,11 @@
                             <input class="form-check-input" role="switch" id="active" type="checkbox" th:field="*{active}"/>
                         </div>
                         <div class="row">
-                        <div class="mb-6">
-                            <label class="form-label" for="name">Name</label>
-                            <input class="form-control" id="name" type="text" th:field="*{name}"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                        </div>
+                            <div class="mb-6">
+                                <label class="form-label" for="name">Name</label>
+                                <input class="form-control" id="name" type="text" th:field="*{name}"/>
+                                <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                            </div>
                             <div class="col-4 mb-3">
                                 <label class="form-label" for="category">Category</label>
                                 <select class="form-select" id="category" th:field="*{category}">

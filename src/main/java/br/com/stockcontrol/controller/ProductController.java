@@ -33,8 +33,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute Product product, BindingResult result, RedirectAttributes attr) {
+    public String save(@Valid @ModelAttribute Product product, BindingResult result, RedirectAttributes attr, ModelMap model) {
         if (result.hasErrors()) {
+            model.addAttribute("categories", Arrays.asList(Category.values()));
             return "product/form";
         }
         if (product.getId() == null) {

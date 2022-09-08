@@ -19,33 +19,35 @@
 
     <div class="container">
         <div class="bg-light p-5 rounded">
-                <h1>Products Data</h1>
+                <h1>Entry notes</h1>
                 <hr>
                 <div>
                     <!--th:object = CREATES AN OBJECT | th:action = SPECIFIES THE URL WHERE DATA WILL BE SENT-->
-                    <form th:action="@{/products}" th:object="${product}" method="post">
-                        <input id="activated" type="hidden" th:field="*{id}"/>
-                        <div class="mb-3 form-check form-switch">
-                            <label class="form-check-label" for="active">Active</label>
-                            <input class="form-check-input" role="switch" id="active" type="checkbox" th:field="*{active}"/>
+                    <form th:action="@{/entry-note}" method="post">
+                        <input id="id" type="hidden" th:field="*{entryNote.id}"/>
+                        <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(feedback)}">
+                            <span th:text="${feedback}"></span>
                         </div>
                         <div class="row">
-                            <div class="mb-6">
-                                <label class="form-label" for="name">Name</label>
-                                <input class="form-control" id="name" type="text" th:field="*{name}"/>
-                                <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                            <div class="col-4 mb-3">
+                                <label class="form-label" for="supplier">Supplier</label>
+                                <select class="form-select" id="supplier" th:field="*{entryNote.supplier.id}">
+                                    <option value="">Select a Supplier</option>
+                                    <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.tradingName}"></option>
+                                </select>
+                                <span style="color: red" th:if="${#fields.hasErrors('entryNote.supplier')}" th:erros="*{entryNote.supplier}"></span>
                             </div>
                             <div class="col-4 mb-3">
-                                <label class="form-label" for="category">Category</label>
-                                <select class="form-select" id="category" th:field="*{category}">
-                                    <option value="">Select a Category</option>
-                                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category.getDescription()}"></option>
-                                </select>
-                                <span style="color: red" th:if="${#fields.hasErrors('category')}" th:erros="*{category}"></span>
+                                <label class="form-label" for="dateTime">Purchase Date</label>
+                                <input class="form-control" id="dateTime" type="datetime-local" th:field="*{entryNote.dateTime}">
+                                <span style="color: red" th:if="${#fields.hasErrors('entryNote.dateTime')}" th:erros="*{entryNote.dateTime}"></span>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <a href="list.html" target="_blank"><input class="btn btn-primary" type="submit" value="Save"></a>
+                            <div class="col-4 mb-3">
+                                <label class="form-label" for="total">Total</label>
+                                <input class="form-control" id="total" step="any" type="number" readonly th:field="*{entryNote.total}">
+                                <span style="color: red" th:if="${#fields.hasErrors('entryNote.total')}" th:erros="*{entryNote.total}"></span>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="save">
                         </div>
                     </form>
                 </div>
