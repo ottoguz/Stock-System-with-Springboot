@@ -51,9 +51,14 @@ public class CustomerController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("customer", bo.searchById(id));
+        try {
+            model.addAttribute("customer", bo.searchById(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("/customer/form", model);
     }
+
     @RequestMapping(value = "/inactivate/{id}", method = RequestMethod.GET)
     public String inactivate(@PathVariable("id") Long id, RedirectAttributes attr) {
         try {

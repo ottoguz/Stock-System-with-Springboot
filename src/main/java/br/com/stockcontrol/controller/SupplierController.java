@@ -52,7 +52,11 @@ public class SupplierController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("supplier", supplierBO.searchById(id));
+        try {
+            model.addAttribute("supplier", supplierBO.searchById(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("/supplier/form", model);
     }
 
