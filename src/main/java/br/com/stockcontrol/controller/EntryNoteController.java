@@ -49,4 +49,10 @@ public class EntryNoteController {
         }
         return "redirect:/entry-note";
     }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView listEntry(ModelMap model) {
+        model.addAttribute("notes", entryNoteBO.list());
+        return new ModelAndView("/entry-note/list", model);
+    }
 }
