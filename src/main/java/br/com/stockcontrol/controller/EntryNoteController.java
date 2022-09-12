@@ -1,13 +1,16 @@
 package br.com.stockcontrol.controller;
 
 import br.com.stockcontrol.bo.EntryNoteBO;
+import br.com.stockcontrol.bo.ProductBO;
 import br.com.stockcontrol.bo.SupplierBO;
 import br.com.stockcontrol.model.EntryNote;
+import br.com.stockcontrol.model.EntryNoteItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +25,9 @@ public class EntryNoteController {
 
     @Autowired
     private EntryNoteBO entryNoteBO;
+
+    @Autowired
+    private ProductBO productBO;
 
     @Autowired
     private SupplierBO supplierBO;
@@ -54,5 +60,15 @@ public class EntryNoteController {
     public ModelAndView listEntry(ModelMap model) {
         model.addAttribute("notes", entryNoteBO.list());
         return new ModelAndView("/entry-note/list", model);
+    }
+
+    @RequestMapping(value = "/{id}/item", method = RequestMethod.GET )
+    public ModelAndView product(@PathVariable("id") Long id, ModelMap model) {
+        EntryNoteItem nei = new EntryNoteItem();
+        EntryNote en = entryNoteBO.searchById(id);
+        nei.setEntryNote(en);
+        model.addAttribute("entryNoteItem", nei);
+        model.addAttribute("products", productBO.list());
+        return new ModelAndView("/entry-note-item/form", model);
     }
 }
