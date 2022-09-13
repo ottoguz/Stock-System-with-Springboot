@@ -38,4 +38,27 @@ public class EntryNoteItemBO implements CRUD<EntryNoteItem, Long> {
     public void remove(EntryNoteItem entryNoteItem) {
         entryNoteItemDAO.remove(entryNoteItem);
     }
+
+    public boolean alreadyAddedItem(EntryNoteItem entryNoteItem) {
+        Long entryNoteId = entryNoteItem.getEntryNote().getId();
+        List<EntryNoteItem> items = entryNoteItemDAO.listItemsNote(entryNoteId);
+        
+        Long productId = entryNoteItem.getProduct().getId();
+        
+        if (entryNoteItem.getId() == null) {
+            for (EntryNoteItem item : items) {
+                if (item.getProduct().getId() ==  productId) {
+                    return true;
+                }
+            }
+        } else {
+            Long entryNoteItemId = entryNoteItem.getId();
+            for (EntryNoteItem item : items) {
+                if (item.getProduct().getId() == productId && entryNoteItemId == item.getId()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

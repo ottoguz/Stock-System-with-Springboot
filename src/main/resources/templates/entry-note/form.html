@@ -47,10 +47,40 @@
                                 <input class="form-control" id="total" step="any" type="number" readonly th:field="*{entryNote.total}">
                                 <span style="color: red" th:if="${#fields.hasErrors('entryNote.total')}" th:erros="*{entryNote.total}"></span>
                             </div>
+                        </div>
+                        <div class="mb-3" th:if="${entryNote.id != null}">
+                            <a class="btn btn-sm btn-success" th:href="@{/entry-note/{id}/item(id=${entryNote.id})}">Add a product</a>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>PRODUCT</b></td>
+                                        <td><b>QUANTITY</b></td>
+                                        <td><b>UNIT PRICE</b></td>
+                                        <td><b>TOTAL PRICE</b></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item : ${entryNote.items}">
+                                        <td th:text="${item.product.name}"></td>
+                                        <td th:text="${item.quantity}"></td>
+                                        <td th:text="${#numbers.formatDecimal(item.unitValue, 0, 'POINT', 2, 'COMMA')}"></td>
+                                        <td th:text="${#numbers.formatDecimal(item.totalValue, 0, 'POINT', 2, 'COMMA')}"></td>
+                                        <td>
+                                            <a class="btn btn-sm btn-secondary" th:href="@{/entry-note-item/edit/{id}(id=$(item.id)}">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-secondary" th:href="@{/entry-note-item/remove/{id}(id=$(item.id)}">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mb-3">
                             <input class="btn btn-primary" type="submit" value="save">
                         </div>
                     </form>
-                    <a class="btn btn-sm btn-success" th:ref="@{/entry-note/{id}/item(id=${entryNote.id})}">Add a Product</a>
                 </div>
             </div>
         </div>
