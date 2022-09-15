@@ -47,6 +47,7 @@ public class EntryNoteItemController {
             model.addAttribute("products", productBO.list());
             return "/entry-note-item/form";
         }
+
         EntryNote entryNote = entryNoteBO.searchById(entryNoteItem.getEntryNote().getId());
         entryNoteItem.setEntryNote(entryNote);
 

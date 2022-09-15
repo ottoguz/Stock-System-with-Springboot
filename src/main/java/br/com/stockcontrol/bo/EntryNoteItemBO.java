@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EntryNoteItemBO implements CRUD<EntryNoteItem, Long> {
@@ -47,7 +48,7 @@ public class EntryNoteItemBO implements CRUD<EntryNoteItem, Long> {
         
         if (entryNoteItem.getId() == null) {
             for (EntryNoteItem item : items) {
-                if (item.getProduct().getId() ==  productId) {
+                if (item.getProduct().getId() == productId) {
                     return true;
                 }
             }

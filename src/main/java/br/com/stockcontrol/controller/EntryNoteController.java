@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.Arrays;
 
 @Controller
-@RequestMapping(value = "/entry-note")
+@RequestMapping("/entry-note")
 public class EntryNoteController {
 
     @Autowired
@@ -41,7 +41,12 @@ public class EntryNoteController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute EntryNote entryNote, BindingResult result, RedirectAttributes attr) {
+    public String save(@Valid @ModelAttribute EntryNote entryNote, BindingResult result, RedirectAttributes attr, ModelMap model) {
+
+        if (entryNote.getSupplier().getId() == null) {
+            result.rejectValue("supplier", "field.required");
+        }
+
         if (result.hasErrors()) {
             return "/entry-note/form";
         }
@@ -64,11 +69,27 @@ public class EntryNoteController {
 
     @RequestMapping(value = "/{id}/item", method = RequestMethod.GET )
     public ModelAndView product(@PathVariable("id") Long id, ModelMap model) {
-        EntryNoteItem nei = new EntryNoteItem();
+        EntryNoteItem eni = new EntryNoteItem();
         EntryNote en = entryNoteBO.searchById(id);
-        nei.setEntryNote(en);
-        model.addAttribute("entryNoteItem", nei);
+        eni.setEntryNote(en);
+        model.addAttribute("entryNoteItem", eni);
         model.addAttribute("products", productBO.list());
         return new ModelAndView("/entry-note-item/form", model);
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("entryNoteItem", new EntryNoteItem());
+        model.addAttribute("suppliers", supplierBO.list());
+        model.addAttribute("entryNote", entryNoteBO.searchById(id));
+        return new ModelAndView("/entry-note/form", model);
+    }
+
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    public String remove(@PathVariable("id") Long id, RedirectAttributes attr) {
+        EntryNote en = entryNoteBO.searchById(id);
+        entryNoteBO.remove(en);
+        attr.addFlashAttribute("feedback", "Entry note successfully removed!");
+        return "redirect:/entry-note";
     }
 }

@@ -43,7 +43,7 @@ public class EntryNoteItemDAO implements CRUD<EntryNoteItem, Long>{
     }
 
     public List<EntryNoteItem> listItemsNote(Long entryNoteId) {
-        Query query = entityManager.createQuery("from EntryNoteItem n where n.entryNote.id = :entryNoteId")
+        Query query = entityManager.createQuery("from EntryNoteItem e where e.entryNote.id = :entryNoteId")
                 .setParameter("entryNoteId", entryNoteId);
         return query.getResultList();
     }
