@@ -55,7 +55,7 @@ public class EntryNoteItemBO implements CRUD<EntryNoteItem, Long> {
         } else {
             Long entryNoteItemId = entryNoteItem.getId();
             for (EntryNoteItem item : items) {
-                if (item.getProduct().getId() == productId && entryNoteItemId == item.getId()) {
+                if (item.getProduct().getId() == productId && entryNoteItemId != item.getId()) {
                     return true;
                 }
             }
