@@ -23,7 +23,7 @@ public class ProductStockDAO implements CRUD<ProductStock, Long> {
 
     @Override
     public List<ProductStock> list() {
-        Query query = entityManager.createNativeQuery("selecet ps from ProductStock ps");
+        Query query = entityManager.createQuery("select ps from ProductStock ps");
         return query.getResultList();
     }
 

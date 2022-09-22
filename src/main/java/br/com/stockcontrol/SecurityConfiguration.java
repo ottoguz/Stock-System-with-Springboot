@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void  configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                    .antMatchers("/api/**").permitAll()
                     .antMatchers(HttpMethod.GET, "/entry-note").hasRole("MANAGER")
                     .antMatchers(HttpMethod.GET, "/exit-note").hasRole("MANAGER")
                     .antMatchers(HttpMethod.GET, "/stock").hasRole("MANAGER")
@@ -48,9 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .permitAll()
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login");
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login")
+                .and()
+                    .cors()
+                .and()
+                    .csrf()
+                    .disable();
     }
 
 

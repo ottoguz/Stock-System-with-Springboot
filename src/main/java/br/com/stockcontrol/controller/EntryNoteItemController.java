@@ -76,7 +76,7 @@ public class EntryNoteItemController {
         EntryNoteItem entryNoteItem = entryNoteItemBO.searchById(id);
         noteId = entryNoteItem.getEntryNote().getId();
         entryNoteItemBO.remove(entryNoteItem);
-        attr.addFlashAttribute("feeback", "Entry note item successfully removed!");
+        attr.addFlashAttribute("feedback", "Entry note item successfully removed!");
         return "redirect:/entry-note/edit/" + noteId;
     }
 }
